@@ -1,0 +1,47 @@
+{
+    "name": "nawasara/auth-primitives",
+    "description": "Low-level auth primitives for Nawasara packages: sudo mode (session window, Livewire attribute, route middleware), built to live below the application shell so domain packages can depend on it without dragging in core.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "nawasara",
+        "laravel",
+        "livewire",
+        "auth",
+        "sudo",
+        "step-up"
+    ],
+    "authors": [
+        {
+            "name": "Pringgo J. Saputro",
+            "email": "odyinggo@gmail.com",
+            "role": "Lead Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/nawasara/auth-primitives/issues",
+        "source": "https://github.com/nawasara/auth-primitives"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nawasara\\AuthPrimitives\\": "src/"
+        },
+        "files": [
+            "src/Helpers/functions.php"
+        ]
+    },
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.0|^12.0",
+        "livewire/livewire": "^3.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nawasara\\AuthPrimitives\\AuthPrimitivesServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
