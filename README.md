@@ -1,27 +1,21 @@
 # nawasara/auth-primitives
 
-Low-level auth primitives for [Nawasara](https://github.com/nawasara)
-packages. Lives below the application shell (`nawasara/core`) so any
-domain package can depend on it without pulling in the rest of Nawasara.
+Low-level auth primitives for [Nawasara](https://github.com/nawasara) packages. It lives below the application shell (`nawasara/core`) so any domain package can depend on it without pulling in the rest of Nawasara.
 
 ## What's in the box
 
 | Primitive | Purpose |
 |---|---|
-| `Nawasara\AuthPrimitives\Auth\Sudo` | Session window — single source of truth for "has the user recently re-authenticated?" |
+| `Nawasara\AuthPrimitives\Auth\Sudo` | Session window: the single source of truth for whether the user recently re-authenticated |
 | `Nawasara\AuthPrimitives\Http\Middleware\EnsureSudo` | Route gate, registered as the `sudo` middleware alias |
-| `#[Nawasara\AuthPrimitives\Attributes\RequiresSudo]` | Livewire method attribute — gates one action behind sudo |
-| `Nawasara\AuthPrimitives\Traits\WithSudo` | Livewire component trait — handles the step-up redirect |
+| `#[Nawasara\AuthPrimitives\Attributes\RequiresSudo]` | Livewire method attribute that gates one action behind sudo |
+| `Nawasara\AuthPrimitives\Traits\WithSudo` | Livewire component trait that handles the step-up redirect |
 | `Nawasara\AuthPrimitives\Exceptions\SudoRequiredException` | Renderable exception (403 or redirect) |
 | `sudo_active()`, `sudo_remaining_seconds()` | Blade helpers |
 
 ## What's NOT in here
 
-The OTP step-up itself (IdP redirect, callback, ID-token verification) is
-**not** in this package. It lives in `nawasara/core`'s `SudoController`,
-which calls `Sudo::confirm($userId)` on a verified step-up. This split
-lets domain packages enforce a sudo window without depending on the
-integration plumbing.
+The OTP step-up itself (IdP redirect, callback, ID-token verification) is **not** in this package. It lives in `nawasara/core`'s `SudoController`, which calls `Sudo::confirm($userId)` on a verified step-up. This split lets domain packages enforce a sudo window without depending on the integration plumbing.
 
 ## Usage
 
@@ -31,8 +25,7 @@ integration plumbing.
 Route::get('db/drop/{name}', ...)->middleware(['auth', 'sudo']);
 ```
 
-The `sudo` alias is registered automatically by
-`AuthPrimitivesServiceProvider`.
+The `sudo` alias is registered automatically by `AuthPrimitivesServiceProvider`.
 
 ### Livewire action-level
 
